@@ -1,18 +1,22 @@
 {
   "name": "learn-react",
   "version": "1.0.0",
-  "description": "Learning React project",
-  "main": "App.js",
-  "devDependencies": {
-    "eslint-config-react-app": "^7.0.1"
+  "description": "",
+  "homepage": "https://github.com/Tanishq-afk/namaste-react#readme",
+  "bugs": {
+    "url": "https://github.com/Tanishq-afk/namaste-react/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tanishq-afk/namaste-react.git"
+  },
+  "license": "ISC",
+  "author": "Tanishq Sachdev",
+  "type": "commonjs",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "test": "jest"
   },
-  "dependencies": {
-    "eslint": "^8.57.1",
-    "prettier": "^3.8.1"
+  "devDependencies": {
+    "parcel": "^2.16.4"
   }
 }
