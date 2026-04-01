@@ -1,4 +1,119 @@
-body {
-  color: red;
+.header {
+  border: 1px solid #000;
+  justify-content: space-between;
+  padding: 10px;
+  display: flex;
+}
+
+.logo {
+  width: 100px;
+}
+
+.nav-items > ul {
+  font-size: 20px;
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-items > ul > li {
+  margin: 10px;
+  padding: 10px;
+}
+
+.res-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  display: flex;
+}
+
+.res-card {
+  text-align: center;
+  background-color: #f0f0f0;
+  border: none;
+  width: 300px;
+  padding: 5px;
+}
+
+.res-card:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px #000000bf;
+}
+
+.search {
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  display: flex;
+}
+
+.res-img {
+  border-radius: 10px;
+  width: 100%;
+  height: 150px;
+}
+
+.filter {
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  display: flex;
+}
+
+.btn {
+  color: #fff;
+  cursor: pointer;
+  background-color: #e30074;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.shimmer-container {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  display: flex;
+}
+
+.shimmer-card {
+  background: linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%) 0 0 / 200% 100%;
+  border-radius: 10px;
+  width: 300px;
+  height: 350px;
+  padding: 5px;
+  animation: 1.5s infinite shimmer;
+}
+
+.shimmer-control {
+  background: linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%) 0 0 / 200% 100%;
+  border-radius: 5px;
+  animation: 1.5s infinite shimmer;
+}
+
+.shimmer-input {
+  width: 240px;
+  height: 40px;
+}
+
+.shimmer-btn {
+  width: 110px;
+  height: 40px;
+}
+
+.shimmer-btn-wide {
+  width: 220px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 /*# sourceMappingURL=Learn React.9e4c6fd2.css.map */
