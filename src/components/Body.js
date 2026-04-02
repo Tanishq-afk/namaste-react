@@ -26,7 +26,6 @@ const Body = () => {
     return (
         <div className="body">
             <div className="filter">
-                <div className="search">
                     <input
                         type="text"
                         className="search-box"
@@ -46,7 +45,7 @@ const Body = () => {
                         className="btn">
                     Search
                     </button>
-                </div>
+                
                 <button className="btn" onClick={() => {
                     const filteredList = listOfRestaurants.filter(restaurant => restaurant.info.avgRating > 4.5); 
                     setFilteredRestaurant(filteredList);
