@@ -1,3 +1,4 @@
-node-modules
+node_modules
 .parcel-cache
 dist
+.parcel-tmp

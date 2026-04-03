@@ -27,10 +27,16 @@
   display: flex;
 }
 
+.restaurant-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
 .res-card {
   text-align: center;
   background-color: #f0f0f0;
-  border: none;
+  border-radius: 10px;
   width: 300px;
   padding: 5px;
 }
@@ -40,22 +46,15 @@
   box-shadow: 0 0 10px #000000bf;
 }
 
-.search {
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  display: flex;
-}
-
 .res-img {
   border-radius: 10px;
   width: 100%;
-  height: 150px;
+  height: 200px;
 }
 
 .filter {
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin: 20px 0;
   display: flex;
 }
@@ -79,41 +78,11 @@
 }
 
 .shimmer-card {
-  background: linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%) 0 0 / 200% 100%;
+  background-color: #f0f0f0;
   border-radius: 10px;
   width: 300px;
-  height: 350px;
+  height: 400px;
   padding: 5px;
   animation: 1.5s infinite shimmer;
-}
-
-.shimmer-control {
-  background: linear-gradient(90deg, #ececec 25%, #f7f7f7 50%, #ececec 75%) 0 0 / 200% 100%;
-  border-radius: 5px;
-  animation: 1.5s infinite shimmer;
-}
-
-.shimmer-input {
-  width: 240px;
-  height: 40px;
-}
-
-.shimmer-btn {
-  width: 110px;
-  height: 40px;
-}
-
-.shimmer-btn-wide {
-  width: 220px;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-
-  100% {
-    background-position: -200% 0;
-  }
 }
 /*# sourceMappingURL=Learn React.9e4c6fd2.css.map */

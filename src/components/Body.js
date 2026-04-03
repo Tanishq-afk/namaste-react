@@ -1,6 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import { slugifyRestaurantName } from "../utils/restaurantName";
 
 const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -53,7 +55,15 @@ const Body = () => {
             </div>
             <div className="res-container">
                 {filteredRestaurant.map((restaurant) => {
-                    return <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
+                    return (
+                        <Link
+                            key={restaurant.info.id}
+                            className="restaurant-link"
+                            to={`/restaurants/${slugifyRestaurantName(restaurant.info.name)}`}
+                        >
+                            <RestaurantCard resData={restaurant.info} />
+                        </Link>
+                    );
                 })}
             </div>
         </div>
