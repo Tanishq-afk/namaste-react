@@ -377,7 +377,7 @@ export const getMenuByRestaurantName = (restaurantName = "") => {
 
     // Fallback menu so every restaurant card has a dummy menu.
     return {
-        restaurantId: `dynamic_${slugifyRestaurantName(cleanRestaurantName) || "restaurant"}`,
+        restaurantId: `dynamic_${(cleanRestaurantName) || "restaurant"}`,
         name: cleanRestaurantName,
         location: "India",
         cuisines: ["Multi Cuisine"],
