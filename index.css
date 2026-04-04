@@ -85,3 +85,20 @@
     padding: 5px;
     border-radius: 10px;
 }
+
+.user-card {
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.user-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
