@@ -6,6 +6,7 @@ import { slugifyRestaurantName } from "../utils/restaurantName";
 import useRestaurants from "../utils/useRestaurants";
 import useRestaurantFilters from "../utils/useRestaurantFilters";
 import SearchAndFilter from "./SearchAndFilter";
+import useDebounce from "../utils/useDebounce";
 
 const Body = () => {
   const { listOfRestaurants, isLoading } = useRestaurants();
@@ -13,13 +14,14 @@ const Body = () => {
   const [minRating, setMinRating] = useState(0);
   const [vegOnly, setVegOnly] = useState(false);
   const [costRange, setCostRange] = useState(null);
+  const debouncedSearchText = useDebounce(searchText, 500); 
 
-  const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
-    searchText,
-    minRating,
-    vegOnly,
-    costRange,
-  });
+const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
+  searchText: debouncedSearchText,
+  minRating,
+  vegOnly,
+  costRange,
+});
 
   if (isLoading) {
     return <Shimmer />;

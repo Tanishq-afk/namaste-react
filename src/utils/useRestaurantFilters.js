@@ -8,10 +8,6 @@ const getRatingValue = (restaurant) => {
 const getCostForTwoValue = (restaurant) => {
     const costValue = restaurant?.info?.costForTwo;
 
-    if (typeof costValue === "number") {
-        return costValue;
-    }
-
     if (typeof costValue === "string") {
         const match = costValue.match(/\d+/);
         return match ? Number(match[0]) : Number.POSITIVE_INFINITY;
