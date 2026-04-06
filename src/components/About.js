@@ -6,7 +6,7 @@ const About = () => {
         <div>
             <h1>About</h1>
             <h2>We are Mealio's Team!!</h2>
-            <UserClass name="Tanishq Sachdev" location="Hisar, Haryana" contact="tanishq.sachdev@unthinkable.co" />
+            <UserClass />
             </div>
     );
 }

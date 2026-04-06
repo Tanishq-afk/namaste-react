@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getMenuByRestaurantName } from "../utils/menuMockData";
+import { useRestaurantMenu } from "../utils/useRestaurantMenu";
 
 const formatPrice = (price = 0) => {
     if (price >= 1000) {
@@ -9,10 +9,8 @@ const formatPrice = (price = 0) => {
 };
 
 const RestaurantMenu = () => {
-    const { restaurantName } = useParams();
-    const selectedRestaurantName = restaurantName || "";
-    console.log("Selected Restaurant Name:", selectedRestaurantName);
-    const resInfo = getMenuByRestaurantName(selectedRestaurantName);
+    const { restaurantName = "" } = useParams();
+    const resInfo = useRestaurantMenu(restaurantName);
 
     if (!resInfo) {
         return (
@@ -20,7 +18,7 @@ const RestaurantMenu = () => {
                 <h1>Menu not found</h1>
                 <p>
                     We could not find menu data for{" "}
-                    <strong>{selectedRestaurantName}</strong>.
+                    <strong>{restaurantName || "this restaurant"}</strong>.
                 </p>
             </div>
         );
@@ -30,7 +28,7 @@ const RestaurantMenu = () => {
         <div className="menu">
             <h1>{resInfo.name}</h1>
             <h2>Menu</h2>
-            {resInfo.menu.map((category) => (
+            {resInfo.menu?.map((category) => (
                 <div key={category.categoryId} className="menu-category">
                     <h3>{category.title}</h3>
                     <ul>
@@ -45,4 +43,5 @@ const RestaurantMenu = () => {
         </div>
     );
 };
+
 export default RestaurantMenu;
