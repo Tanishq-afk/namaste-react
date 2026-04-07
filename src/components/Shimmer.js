@@ -8,18 +8,9 @@ const Shimmer = () => {
                 <button className="btn" disabled>Cost Under ₹500</button>
             </div>
             <div className="shimmer-container">
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
-                <div className="shimmer-card"></div>
+                {Array.from({ length: 20 }, (_, i) => (
+                    <div className="shimmer-card" key={i}></div>
+                ))}
             </div>
         </div>
     );

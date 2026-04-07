@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -14,7 +14,11 @@ const Body = () => {
   const [minRating, setMinRating] = useState(0);
   const [vegOnly, setVegOnly] = useState(false);
   const [costRange, setCostRange] = useState(null);
-  const debouncedSearchText = useDebounce(searchText, 500); 
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; 
+
+  const debouncedSearchText = useDebounce(searchText, 500);
 
 const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
   searchText: debouncedSearchText,
@@ -22,6 +26,19 @@ const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
   vegOnly,
   costRange,
 });
+
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+const paginatedRestaurants = filteredRestaurants.slice(
+  indexOfFirstItem,
+  indexOfLastItem
+);
+
+useEffect(() => {
+    setCurrentPage(1);
+}, [debouncedSearchText, minRating, vegOnly, costRange]);
+
 
   if (isLoading) {
     return <Shimmer />;
@@ -40,7 +57,7 @@ const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
         setCostRange={setCostRange}
       />
       <div className="res-container">
-        {filteredRestaurants.map((restaurant) => {
+        {paginatedRestaurants.map((restaurant) => {
           return (
             <Link
               key={restaurant.info.id}
@@ -51,6 +68,23 @@ const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
             </Link>
           );
         })}
+      </div>
+      <div className="pagination">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+        >
+          Prev
+        </button>
+
+        <span>Page {currentPage}</span>
+
+        <button
+          disabled={indexOfLastItem >= filteredRestaurants.length}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
