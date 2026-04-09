@@ -29,8 +29,6 @@ const userSchema = new mongoose.Schema(
     },
     googleId: {
       type: String,
-      unique: true,
-      sparse: true,
       trim: true,
     },
     password: {
@@ -57,6 +55,16 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+  }
+);
+
+userSchema.index(
+  { googleId: 1 },
+  {
+    unique: true,
+    partialFilterExpression: {
+      googleId: { $exists: true, $type: "string" },
+    },
   }
 );
 

@@ -16,29 +16,28 @@ const Body = () => {
   const [costRange, setCostRange] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; 
+  const itemsPerPage = 10;
 
   const debouncedSearchText = useDebounce(searchText, 500);
 
-const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
-  searchText: debouncedSearchText,
-  minRating,
-  vegOnly,
-  costRange,
-});
+  const filteredRestaurants = useRestaurantFilters(listOfRestaurants, {
+    searchText: debouncedSearchText,
+    minRating,
+    vegOnly,
+    costRange,
+  });
 
-const indexOfLastItem = currentPage * itemsPerPage;
-const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-const paginatedRestaurants = filteredRestaurants.slice(
-  indexOfFirstItem,
-  indexOfLastItem
-);
+  const paginatedRestaurants = filteredRestaurants.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-useEffect(() => {
+  useEffect(() => {
     setCurrentPage(1);
-}, [debouncedSearchText, minRating, vegOnly, costRange]);
-
+  }, [debouncedSearchText, minRating, vegOnly, costRange]);
 
   if (isLoading) {
     return <Shimmer />;
@@ -57,17 +56,15 @@ useEffect(() => {
         setCostRange={setCostRange}
       />
       <div className="res-container">
-        {paginatedRestaurants.map((restaurant) => {
-          return (
-            <Link
-              key={restaurant.info.id}
-              className="restaurant-link"
-              to={`/restaurants/${slugifyRestaurantName(restaurant.info.name)}`}
-            >
-              <RestaurantCard resData={restaurant.info} />
-            </Link>
-          );
-        })}
+        {paginatedRestaurants.map((restaurant) => (
+          <Link
+            key={restaurant.info.id}
+            className="restaurant-link"
+            to={`/restaurants/${slugifyRestaurantName(restaurant.info.name)}`}
+          >
+            <RestaurantCard resData={restaurant.info} />
+          </Link>
+        ))}
       </div>
       <div className="pagination">
         <button

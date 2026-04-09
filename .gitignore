@@ -3,3 +3,4 @@ dist/
 .parcel-tmp/
 .parcel-cache/
 mealeo-backend/.env
+.env

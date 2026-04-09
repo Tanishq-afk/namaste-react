@@ -15,13 +15,16 @@ class UserClass extends React.Component {
     }
 
     async componentDidMount() {
-        const data = await fetch("https://api.github.com/users/Tanishq-afk");
-        const json = await data.json();
-        console.log(json);
+        try {
+            const data = await fetch("https://api.github.com/users/Tanishq-afk");
+            const json = await data.json();
 
-        this.setState({
-            userInfo: json
-        });
+            this.setState({
+                userInfo: json
+            });
+        } catch {
+            // Keep fallback UI when GitHub request fails.
+        }
     }
 
     render() {

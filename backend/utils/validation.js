@@ -26,8 +26,6 @@ const validateData = (schema, input, options = {}) => {
   return value;
 };
 
-
-// ✅ SIGNUP
 const signUpSchema = Joi.object({
   firstName: Joi.string().trim().min(4).max(50).required(),
   lastName: Joi.string().trim().min(1).max(50).required(),
@@ -37,19 +35,14 @@ const signUpSchema = Joi.object({
     .custom(strongPasswordValidator, "Strong password validation"),
 });
 
-// ✅ LOGIN
 const loginSchema = Joi.object({
   emailId: Joi.string().trim().lowercase().email().required(),
   password: Joi.string().required(),
 });
 
-// ✅ GOOGLE AUTH
 const googleAuthSchema = Joi.object({
   idToken: Joi.string().trim().required(),
 });
-
-
-// ---------- VALIDATION FUNCTIONS ----------
 
 const validateSignUpData = (req) => {
   req.body = validateData(signUpSchema, req.body);

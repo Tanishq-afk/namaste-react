@@ -1,39 +1,56 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { useCart } from "../../context/CartContext";
+import OnlineStatus from "./OnlineStatus";
 
 const Header = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { auth, logout } = useAuth();
+  const { totalItems } = useCart();
+  const { loading, token, user } = auth;
 
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src={LOGO_URL} alt="logo" />
-            </div>
+  if (loading) return <div>Loading...</div>;
 
-            <nav className="nav-items">
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About Us</Link></li>
-                    <li><Link to="/contact">Contact Us</Link></li>
-                    <li><Link to="/cart">Cart</Link></li>
-                </ul>
+  return (
+    <div className="header">
+      <div className="logo-container">
+        <img className="logo" src={LOGO_URL} alt="logo" />
+      </div>
 
-                <div className="auth-bar">
-                    {isLoggedIn && (
-                        <span className="auth-user">Hi, User</span>
-                    )}
+      <nav className="nav-items">
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About Us</Link></li>
+          <li><Link to="/contact">Contact Us</Link></li>
+          <li>
+            <Link to="/cart">Cart ({totalItems})</Link>
+          </li>
+        </ul>
 
-                    <button
-                        className="btn"
-                        onClick={() => setIsLoggedIn(!isLoggedIn)}
-                    >
-                        {isLoggedIn ? "Logout" : "Login"}
-                    </button>
-                </div>
-            </nav>
+        <div className="auth-bar">
+          <OnlineStatus />
+
+          {!token ? (
+            <>
+              <Link to="/login">
+                <button className="btn">Login</button>
+              </Link>
+              <Link to="/signup">
+                <button className="btn">Signup</button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="auth-user">Hi, {user?.name}</span>
+              <button className="btn" onClick={logout}>
+                Logout
+              </button>
+            </>
+          )}
         </div>
-    );
+      </nav>
+    </div>
+  );
 };
 
 export default Header;
