@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { API_BASE } from "../utils/config";
 
@@ -49,36 +50,55 @@ const Signup = () => {
 
   return (
     <div className="auth-container">
-      <h2>Signup</h2>
+      <div className="auth-card">
+        <p className="page-eyebrow">Create Account</p>
+        <h2>Join Mealio</h2>
+        <p className="auth-subtitle">
+          Sign up to save your session and start building your cart faster.
+        </p>
 
-      <input
-        placeholder="First Name"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
+        <div className="auth-form">
+          <input
+            className="auth-field"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
 
-      <input
-        placeholder="Last Name"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
+          <input
+            className="auth-field"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
 
-      <input
-        placeholder="Email"
-        value={emailId}
-        onChange={(e) => setEmailId(e.target.value)}
-      />
+          <input
+            className="auth-field"
+            type="email"
+            placeholder="Email"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+          <input
+            className="auth-field"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-      <button onClick={handleSignup}>Signup</button>
+          <button className="btn auth-submit" type="button" onClick={handleSignup}>
+            Signup
+          </button>
+        </div>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="auth-message auth-message-error">{error}</p>}
+
+        <p className="auth-footer">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };

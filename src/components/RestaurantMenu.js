@@ -66,7 +66,7 @@ const RestaurantMenu = () => {
 
   if (!resInfo) {
     return (
-      <div className="menu">
+      <div className="menu page-shell menu-empty">
         <h1>Menu not found</h1>
         <p>
           We could not find menu data for{" "}
@@ -77,13 +77,17 @@ const RestaurantMenu = () => {
   }
 
   return (
-    <div className="menu">
-      <h1>{resInfo.name}</h1>
-      <h2>Menu</h2>
+    <div className="menu page-shell">
+      <div className="menu-header">
+        <p className="page-eyebrow">Restaurant Menu</p>
+        <h1>{resInfo.name}</h1>
+        <p>Pick your favourites and add them to the cart in a few clicks.</p>
+      </div>
 
       <div className="sort-buttons">
         <button
           className="btn"
+          type="button"
           onClick={() => setSortType("PRICE_LOW_TO_HIGH")}
         >
           Price ↑
@@ -91,26 +95,38 @@ const RestaurantMenu = () => {
 
         <button
           className="btn"
+          type="button"
           onClick={() => setSortType("PRICE_HIGH_TO_LOW")}
         >
           Price ↓
         </button>
 
-        <button className="btn" onClick={() => setSortType(null)}>
+        <button
+          className="btn btn-secondary"
+          type="button"
+          onClick={() => setSortType(null)}
+        >
           Reset
         </button>
       </div>
 
       {sortedMenu?.map((category) => (
         <div key={category.categoryId} className="menu-category">
-          <h3>{category.title}</h3>
+          <div className="menu-category-header">
+            <h3>{category.title}</h3>
+            <span>{category.items.length} items</span>
+          </div>
           <div className="menu-items-grid">
             {category.items.map((item) => (
               <div key={item.id} className="menu-item-card">
                 <h4>{item.name}</h4>
                 {item.description && <p>{item.description}</p>}
                 <p className="menu-item-price">{formatPrice(item.price)}</p>
-                <button className="btn" onClick={() => handleAddToCart(item)}>
+                <button
+                  className="btn"
+                  type="button"
+                  onClick={() => handleAddToCart(item)}
+                >
                   Add
                 </button>
               </div>
@@ -129,10 +145,14 @@ const RestaurantMenu = () => {
             </p>
             <p>Clear cart first to add items from {resInfo.name}.</p>
             <div className="modal-actions">
-              <button className="btn" onClick={handleClearAndAdd}>
+              <button className="btn" type="button" onClick={handleClearAndAdd}>
                 Clear Cart
               </button>
-              <button className="btn" onClick={closePopup}>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={closePopup}
+              >
                 Cancel
               </button>
             </div>

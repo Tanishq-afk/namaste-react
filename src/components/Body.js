@@ -16,7 +16,7 @@ const Body = () => {
   const [costRange, setCostRange] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
 
   const debouncedSearchText = useDebounce(searchText, 500);
 
@@ -44,7 +44,29 @@ const Body = () => {
   }
 
   return (
-    <div className="body">
+    <div className="body page-shell">
+      <section className="home-hero">
+        <div className="home-hero-copy">
+          <p className="page-eyebrow">Curated for every craving</p>
+          <h1>Discover restaurants that feel worth ordering from.</h1>
+          <p>
+            Browse faster, filter smarter, and build your cart in a cleaner,
+            calmer interface.
+          </p>
+        </div>
+
+        <div className="hero-stats">
+          <div className="stat-card">
+            <span>{filteredRestaurants.length}</span>
+            <p>restaurants matching your filters</p>
+          </div>
+          <div className="stat-card">
+            <span>{itemsPerPage}</span>
+            <p>cards shown per page for easy browsing</p>
+          </div>
+        </div>
+      </section>
+
       <SearchAndFilter
         searchText={searchText}
         setSearchText={setSearchText}
@@ -55,6 +77,7 @@ const Body = () => {
         costRange={costRange}
         setCostRange={setCostRange}
       />
+
       <div className="res-container">
         {paginatedRestaurants.map((restaurant) => (
           <Link
@@ -66,8 +89,10 @@ const Body = () => {
           </Link>
         ))}
       </div>
+
       <div className="pagination">
         <button
+          type="button"
           disabled={currentPage === 1}
           onClick={() => setCurrentPage((prev) => prev - 1)}
         >
@@ -77,6 +102,7 @@ const Body = () => {
         <span>Page {currentPage}</span>
 
         <button
+          type="button"
           disabled={indexOfLastItem >= filteredRestaurants.length}
           onClick={() => setCurrentPage((prev) => prev + 1)}
         >

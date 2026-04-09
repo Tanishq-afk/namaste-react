@@ -34,9 +34,12 @@ const Cart = () => {
 
   if (isEmpty) {
     return (
-      <div className="cart-page">
-        <h1>Your Cart</h1>
-        <p>Your cart is empty. Add items from a restaurant menu.</p>
+      <div className="cart-page cart-page-empty page-shell">
+        <section className="page-hero empty-state">
+          <p className="page-eyebrow">Your Cart</p>
+          <h1>Your cart is feeling light.</h1>
+          <p>Your cart is empty right now. Add items from a restaurant menu.</p>
+        </section>
         <Link to="/" className="btn cart-link-btn">
           Browse Restaurants
         </Link>
@@ -45,13 +48,14 @@ const Cart = () => {
   }
 
   return (
-    <div className="cart-page">
-      <div className="cart-header">
+    <div className="cart-page page-shell">
+      <div className="cart-header page-card">
         <div>
-          <h1>Your Cart</h1>
+          <p className="page-eyebrow">Your Cart</p>
+          <h1>Ready for checkout?</h1>
           <p className="cart-restaurant">From: {cart.restaurantName}</p>
         </div>
-        <button className="btn" onClick={clearCart}>
+        <button className="btn btn-secondary" type="button" onClick={clearCart}>
           Clear Cart
         </button>
       </div>
@@ -66,6 +70,7 @@ const Cart = () => {
             <div className="cart-item-actions">
               <button
                 className="btn cart-qty-btn"
+                type="button"
                 onClick={() => decreaseItemQuantity(item.id)}
               >
                 -
@@ -73,11 +78,16 @@ const Cart = () => {
               <span className="cart-qty">{item.quantity}</span>
               <button
                 className="btn cart-qty-btn"
+                type="button"
                 onClick={() => handleIncrease(item)}
               >
                 +
               </button>
-              <button className="btn" onClick={() => removeItem(item.id)}>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={() => removeItem(item.id)}
+              >
                 Remove
               </button>
             </div>
@@ -86,8 +96,14 @@ const Cart = () => {
       </div>
 
       <div className="cart-summary">
-        <p>Total Items: {totalItems}</p>
-        <p>Total Price: {formatPrice(totalPrice)}</p>
+        <div>
+          <span className="summary-label">Total Items</span>
+          <p>{totalItems}</p>
+        </div>
+        <div>
+          <span className="summary-label">Total Price</span>
+          <p>{formatPrice(totalPrice)}</p>
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { GoogleLogin } from "@react-oauth/google";
 import { API_BASE, GOOGLE_CLIENT_ID } from "../utils/config";
@@ -43,7 +44,7 @@ const Login = () => {
       }
 
       login(data);
-      setSuccess("Loggedin successfully");
+      setSuccess("Logged in successfully");
     } catch (err) {
       setSuccess("");
       setError(err.message || "Login failed");
@@ -75,7 +76,7 @@ const Login = () => {
       }
 
       login(data);
-      setSuccess("Loggedin successfully");
+      setSuccess("Logged in successfully");
     } catch (err) {
       setSuccess("");
       setError(err.message || "Google login failed");
@@ -84,34 +85,55 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <div className="auth-card">
+        <p className="page-eyebrow">Welcome Back</p>
+        <h2>Login to continue</h2>
+        <p className="auth-subtitle">
+          Access your saved session and continue building your order.
+        </p>
 
-      <input
-        placeholder="Email"
-        value={emailId}
-        onChange={(e) => setEmailId(e.target.value)}
-      />
+        <div className="auth-form">
+          <input
+            className="auth-field"
+            type="email"
+            placeholder="Email"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
+          />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+          <input
+            className="auth-field"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-      <button onClick={handleLogin}>Login</button>
+          <button className="btn auth-submit" type="button" onClick={handleLogin}>
+            Login
+          </button>
+        </div>
 
-      <p>OR</p>
+        <div className="auth-divider">
+          <span>OR</span>
+        </div>
 
-      {GOOGLE_CLIENT_ID && (
-        <GoogleLogin
-          onSuccess={handleGoogleLogin}
-          onError={() => setError("Google Login Failed")}
-        />
-      )}
+        {GOOGLE_CLIENT_ID && (
+          <div className="google-login-wrap">
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => setError("Google Login Failed")}
+            />
+          </div>
+        )}
 
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {success && <p className="auth-message auth-message-success">{success}</p>}
+        {error && <p className="auth-message auth-message-error">{error}</p>}
+
+        <p className="auth-footer">
+          New here? <Link to="/signup">Create an account</Link>
+        </p>
+      </div>
     </div>
   );
 };
